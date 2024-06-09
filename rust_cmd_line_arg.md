@@ -137,6 +137,69 @@ EoF
 
 ```
 
+## Multiple arguments
+
+```rust,no_run
+#!/usr/bin/env bash
+export EXAMPLE_SCRIPT_FILE="04_multiple_arguments.rs"
+export EXAMPLE_SCRIPT_DIR="examples/"
+cat << EoF > ./$EXAMPLE_SCRIPT_DIR/$EXAMPLE_SCRIPT_FILE
+//FROM HERE
+// [What is the difference between len() and count()?](https://stackoverflow.com/questions/29500666/what-is-the-difference-between-len-and-count)
+use std::env;
+use std::process;
+
+fn main() {
+    let args: Vec<String> = env::args().collect();
+
+    println!("Numbers of args(len) w/o file_name => {}",&args.len() -1);
+
+    if *&args.len() < 2{
+        println!("ERROR : To few arguments");
+        process::exit(1);
+    }
+
+    vec_loop_2(args);
+
+}
+    // loop over vec
+    // https://stackoverflow.com/questions/66092442/how-to-loop-over-a-vector-of-integers-in-rust
+
+
+
+fn vec_loop_2(mut v: Vec<String>) -> Vec<String> {
+    for i in v.iter_mut() {
+        //*i *= 2;
+        println!("arguments => {}",*i);
+    }
+    v
+}
+
+/*
+export FILE_NAME=$EXAMPLE_SCRIPT_FILE
+export FILE_DIR_NAME=$EXAMPLE_SCRIPT_DIR
+echo "clippy prg => \$(echo \$FILE_NAME | cut -d . -f 1)";
+cargo clippy --fix --allow-dirty --allow-staged
+echo "build prg => \$(echo \$FILE_NAME | cut -d . -f 1)";
+cargo build --example "\$(echo \$FILE_NAME | cut -d . -f 1)"
+echo "run PRG => \$(echo \$FILE_NAME | cut -d . -f 1)";
+cargo run --example "\$(echo \$FILE_NAME | cut -d . -f 1)"
+echo "";
+echo "run TEST => \$(echo \$FILE_NAME | cut -d . -f 1)"
+cargo test --example "\$(echo \$FILE_NAME | cut -d . -f 1)"
+# cargo test --jobs 4 --example "\$(echo \$FILE_NAME | cut -d . -f 1)"
+echo "ReturnCode => \$?"
+
+// plain run
+export FILE_NAME=$EXAMPLE_SCRIPT_FILE
+export FILE_DIR_NAME=$EXAMPLE_SCRIPT_DIR
+cargo run --example "\$(echo \$FILE_NAME | cut -d . -f 1)" arg1
+
+*/
+EoF
+
+```
+
 ## template
 
 ```rust,no_run
