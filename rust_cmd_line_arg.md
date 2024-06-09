@@ -98,18 +98,18 @@ use std::process;
 fn main() {
     let args: Vec<String> = env::args().collect();
 
-    println!("Numbers of args(len) {}",&args.len());
+    println!("Numbers of args(len) w/o file_name => {}",&args.len() -1);
 
     if *&args.len() < 2{
         println!("To few arguments");
         process::exit(1);
     }
 
-    let query = &args[0];
-    let file_path = &args[1];
+    let file_name = &args[0];
+    let argument = &args[1];
 
-    println!("Searching for {}", query);
-    println!("In file {}", file_path);
+    println!("execute path/file name {}", file_name);
+    println!("argument {}", argument);
 }
 
 /*
