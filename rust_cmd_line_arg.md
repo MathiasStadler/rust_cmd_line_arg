@@ -101,7 +101,7 @@ fn main() {
     println!("Numbers of args(len) w/o file_name => {}",&args.len() -1);
 
     if *&args.len() < 2{
-        println!("To few arguments");
+        println!("ERROR : To few arguments");
         process::exit(1);
     }
 
