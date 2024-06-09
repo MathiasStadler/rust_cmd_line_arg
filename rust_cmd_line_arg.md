@@ -159,7 +159,13 @@ fn main() {
         process::exit(1);
     }
 
+    if *&args.len() > 2{
+        println!("ERROR : To many arguments, we can only handle one argument");
+        process::exit(1);
+    }
+
     vec_loop_2(args);
+    process::exit(0);
 
 }
     // loop over vec
